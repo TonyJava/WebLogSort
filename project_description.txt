@@ -1,0 +1,19 @@
+A MapReduce program that performs a secondary sorting on a log file which stores the access history to a webpage. 
+Every line of the input dataset contains the IP_address that accessed the web page, the time stamp when the web page was accessed and the http request message that was submitted by the IP address. Here is an example line from the input file:
+10.216.113.172 - - [16/Jul/2009:02:51:29 -0700] "GET /assets/js/lowpro.js HTTP/1.1" 200 10469
+The MapReduce program read this input file and produce as output the latest access time for each IP address that appeared in the input file. 
+
+For example, if the input file contains the following records:
+10.125.118.102 - - [08/Apr/2010:10:20:15 -0700] "GET /assets/img/banner/ten-years-banner- white.jpg HTTP/1.1" 200 18077
+10.125.118.102 - - [08/Apr/2010:10:20:15 -0700] "GET /assets/img/banner/ten-years-banner- grey.jpg HTTP/1.1" 200 17903
+10.125.118.102 - - [08/Apr/2010:10:20:15 -0700] "GET /images/filmpics/0000/1143/197-the- greatest-stills-1-2362x1575_thumb.jpg HTTP/1.1" 200 35392
+10.125.118.102 - - [08/Apr/2010:10:20:15 -0700] "GET /images/filmpics/0000/1145/197-the- greatest-stills-2-2362x1575_thumb.jpg HTTP/1.1" 200 30065
+10.125.118.102 - - [08/Apr/2010:10:20:17 -0700] "GET /images/filmpics/0000/1151/197-the- greatest-stills-5-2362x1575_thumb.jpg HTTP/1.1" 200 27939
+10.125.118.102 - - [08/Apr/2010:10:20:17 -0700] "GET /images/filmpics/0000/1153/197-the- greatest-stills-6-2362x1575_thumb.jpg HTTP/1.1" 200 76418
+10.125.118.102 - - [08/Apr/2010:10:20:18 -0700] "GET /images/filmpics/0000/1155/197-the- greatest-stills-7-2362x1575_thumb.jpg HTTP/1.1" 200 35695
+10.125.118.102 - - [08/Apr/2010:10:20:18 -0700] "GET /images/filmpics/0000/1157/197-the- greatest-stills-8-2362x1575_thumb.jpg HTTP/1.1" 200 42179
+10.125.118.102 - - [08/Apr/2010:10:20:18 -0700] "GET /images/filmpics/0000/1197/The_Greatest_2d_DVD_thumb.jpg HTTP/1.1" 200 33990
+10.125.118.102 - - [08/Apr/2010:10:20:19 -0700] "GET /favicon.ico HTTP/1.1" 200 1406
+
+Then the output file should contain the following record:
+10.125.118.102 [08/Apr/2010:10:20:19 -0700]
